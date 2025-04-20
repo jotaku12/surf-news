@@ -11,21 +11,28 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: 3.10
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
     - name: Build index.html
       env:
         GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
       run: |
         python main.py
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./
         publish_branch: gh-pages
+
+    - name: Done!
+      run: echo "🎉 Successfully deployed Surf News!"

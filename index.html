@@ -1,11 +1,147 @@
-<!DOCTYPE html>
+<!-- template.h<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>🏄‍♂️ Surf News</title>
+  <title>🏄‍♂️ 써핑뉴스 게시판 🌈</title>
+  <style>
+    @keyframes waveBg {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 20px; }
+    }
+    @keyframes letterColorCycle {
+      0% { color: red; }
+      25% { color: orange; }
+      50% { color: lime; }
+      75% { color: cyan; }
+      100% { color: violet; }
+    }
+    @keyframes waveText {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+    }
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: #0066cc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ctext x='0' y='40' font-size='50'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E") repeat;
+      background-size: 60px 60px;
+      animation: waveBg 10s linear infinite;
+      color: white;
+      padding: 1rem;
+    }
+    h1.title {
+      text-align: center;
+      font-family: 'Gungsuh', serif;
+      font-size: 2.5rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+    }
+    h1.title span {
+      animation: letterColorCycle 2s infinite alternate;
+    }
+    .sub-wave {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      animation: waveText 2s infinite ease-in-out;
+      color: yellow;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .tab-button {
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border: 3px dashed #fff;
+      border-radius: 12px;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 5px #000;
+      transition: all 0.3s ease-in-out;
+    }
+    .tab-button:hover {
+      background: hotpink;
+      color: white;
+    }
+    .tab-button.active {
+      background: lime;
+      color: #000;
+    }
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .news-card {
+      background: white;
+      color: black;
+      padding: 1rem;
+      border: 4px groove #999;
+      border-radius: 12px;
+    }
+    .news-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .news-card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+    }
+    .news-card p {
+      font-size: 0.9rem;
+      margin: 0.3rem 0;
+    }
+    .news-card a {
+      color: #cc0000;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>🏄‍♂️ 서핑 뉴스 자동 배포 성공!</h1>
-  <p>축하합니다 조타쿠! 이제 서핑 뉴스가 세상에 공개됐어요 🌊🎉</p>
+  <h1 class="title">
+    <span>🏄</span><span>‍</span><span>♂</span><span>️</span><span> </span><span>써</span><span>핑</span><span>뉴</span><span>스</span><span> </span><span>게</span><span>시</span><span>판</span><span> </span><span>🌈</span>
+  </h1>
+  <div class="sub-wave">🌊 서핑 좋아, 너가 좋아 🌈</div>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="filterNews('all')">📢 전체</button>
+    <button class="tab-button" onclick="filterNews('korea')">🇰🇷 한국 뉴스</button>
+    <button class="tab-button" onclick="filterNews('bali')">🏝️ 발리 뉴스</button>
+    <button class="tab-button" onclick="filterNews('global')">🌍 해외 뉴스</button>
+  </div>
+
+  <div id="news-container" class="news-container">
+    
+  </div>
+
+  <script>
+    function filterNews(type) {
+      const allCards = document.querySelectorAll('.news-card');
+      const allTabs = document.querySelectorAll('.tab-button');
+      allTabs.forEach(tab => tab.classList.remove('active'));
+      const activeBtn = [...allTabs].find(btn => btn.innerText.includes(
+        type === 'all' ? '전체' :
+        type === 'korea' ? '한국' :
+        type === 'bali' ? '발리' : '해외'
+      ));
+      if (activeBtn) activeBtn.classList.add('active');
+      allCards.forEach(card => {
+        card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
+      });
+    }
+    window.onload = () => filterNews('all');
+  </script>
 </body>
-</html>
+</html>tml sample placeholder -->

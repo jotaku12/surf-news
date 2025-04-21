@@ -1,156 +1,141 @@
-<!-- template.h<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>🏄‍♂️ 써핑뉴스 게시판 🌈</title>
+  <title>🏄‍♂️ Surf News</title>
   <style>
-    @keyframes waveBg {
-      0% { background-position: 0 0; }
-      100% { background-position: 100px 20px; }
+    body {
+      font-family: "Courier New", monospace;
+      background-color: #0066cc;
+      margin: 0;
+      padding: 0;
+      color: white;
+      background-image: linear-gradient(135deg, #0044aa 25%, #003399 25%, #003399 50%, #0044aa 50%, #0044aa 75%, #003399 75%, #003399 100%);
+      background-size: 50px 50px;
     }
-    @keyframes letterColorCycle {
-      0% { color: red; }
-      25% { color: orange; }
-      50% { color: lime; }
-      75% { color: cyan; }
+
+    h1 {
+      text-align: center;
+      font-family: 'Gungseo', serif;
+      font-size: 2.5rem;
+      animation: rainbow 4s infinite;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      animation: waveText 4s ease-in-out infinite;
+    }
+
+    @keyframes rainbow {
+      0%   { color: red; }
+      25%  { color: yellow; }
+      50%  { color: lime; }
+      75%  { color: cyan; }
       100% { color: violet; }
     }
+
     @keyframes waveText {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(20px); }
+      0%   { transform: translateX(0); color: yellow; }
+      50%  { transform: translateX(20px); color: cyan; }
+      100% { transform: translateX(0); color: yellow; }
     }
-    body {
-      margin: 0;
-      font-family: 'Courier New', monospace;
-      background: #0066cc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ctext x='0' y='40' font-size='50'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E") repeat;
-      background-size: 60px 60px;
-      animation: waveBg 10s linear infinite;
-      color: white;
-      padding: 1rem;
-    }
-    h1.title {
-      text-align: center;
-      font-family: 'Gungsuh', serif;
-      font-size: 2.5rem;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.2rem;
-    }
-    h1.title span {
-      animation: letterColorCycle 2s infinite alternate;
-    }
-    .sub-wave {
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-      animation: waveText 2s infinite ease-in-out;
-      color: yellow;
-    }
+
     .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
+      text-align: center;
+      margin: 1rem;
     }
-    .tab-button {
+
+    .tab {
       background: #ffcc00;
-      color: #000;
+      color: black;
       font-weight: bold;
-      border: 3px dashed #fff;
-      border-radius: 12px;
-      padding: 0.6rem 1.5rem;
-      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border: 2px solid #fff;
       cursor: pointer;
-      box-shadow: 0 0 5px #000;
-      transition: all 0.3s ease-in-out;
     }
-    .tab-button:hover {
-      background: hotpink;
-      color: white;
-    }
-    .tab-button.active {
-      background: lime;
-      color: #000;
-    }
-    .news-container {
+
+    .news-list {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1rem;
-      max-width: 700px;
-      margin: 0 auto;
+      padding: 2rem;
     }
-    .news-card {
+
+    .card {
       background: white;
       color: black;
-      padding: 1rem;
-      border: 4px groove #999;
-      border-radius: 12px;
+      border: 3px double #444;
+      width: 320px;
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 0.95rem;
     }
-    .news-card img {
+
+    .card img {
       width: 100%;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
+      height: auto;
     }
-    .news-card h3 {
-      font-size: 1.2rem;
-      margin: 0 0 0.5rem;
+
+    .card-content {
+      padding: 0.5rem 1rem;
     }
-    .news-card p {
-      font-size: 0.9rem;
-      margin: 0.3rem 0;
+
+    .card h3 {
+      font-size: 1rem;
+      margin: 0.5rem 0;
     }
-    .news-card a {
-      color: #cc0000;
-      font-weight: bold;
-      text-decoration: underline;
+
+    .tag {
+      font-size: 0.8rem;
+      color: white;
+      background: #0077cc;
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      border-radius: 5px;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1 class="title">
-    {% for char in '🏄‍♂️ 써핑뉴스 게시판 🌈' %}<span>{{ char }}</span>{% endfor %}
-  </h1>
-  <div class="sub-wave">🌊 서핑 좋아, 너가 좋아 🌈</div>
 
-  <div class="tabs">
-    <button class="tab-button active" onclick="filterNews('all')">📢 전체</button>
-    <button class="tab-button" onclick="filterNews('korea')">🇰🇷 한국 뉴스</button>
-    <button class="tab-button" onclick="filterNews('bali')">🏝️ 발리 뉴스</button>
-    <button class="tab-button" onclick="filterNews('global')">🌍 해외 뉴스</button>
-  </div>
+  <h1>🌊 {{ date }} 서핑 뉴스</h1>
+  <div class="subtitle">서핑 좋아, 너가 좋아 💙💛💚</div>
 
-  <div id="news-container" class="news-container">
-    {% for article in articles %}
-      <div class="news-card" data-type="{{ article.type }}">
-        {% if article.thumbnail %}
-          <img src="{{ article.thumbnail }}" alt="썸네일">
-        {% endif %}
-        <h3>{{ article.title }}</h3>
-        <p>📎 <a href="{{ article.link }}" target="_blank">기사 보기</a></p>
-        <p>📍 분류: {{ '🇰🇷 한국' if article.type == 'korea' else ('🏝️ 발리' if article.type == 'bali' else '🌍 해외') }}</p>
+  <div class="news-list">
+    {% if articles %}
+      {% for article in articles %}
+        <div class="card">
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail }}" alt="썸네일">
+          {% endif %}
+          <div class="card-content">
+            <h3>{{ article.title }}</h3>
+            <a href="{{ article.link }}" target="_blank">🔗 기사 보기</a><br>
+            <span class="tag">
+              {% if article.type == "korea" %}🇰🇷 국내
+              {% elif article.type == "bali" %}🏝️ 발리
+              {% else %}🌍 해외
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div style="text-align:center; font-size:1.2rem; color:yellow;">
+        😢 오늘은 뉴스가 없어요! 내일 다시 확인해 주세요!
       </div>
-    {% endfor %}
+    {% endif %}
   </div>
 
-  <script>
-    function filterNews(type) {
-      const allCards = document.querySelectorAll('.news-card');
-      const allTabs = document.querySelectorAll('.tab-button');
-      allTabs.forEach(tab => tab.classList.remove('active'));
-      const activeBtn = [...allTabs].find(btn => btn.innerText.includes(
-        type === 'all' ? '전체' :
-        type === 'korea' ? '한국' :
-        type === 'bali' ? '발리' : '해외'
-      ));
-      if (activeBtn) activeBtn.classList.add('active');
-      allCards.forEach(card => {
-        card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
-      });
-    }
-    window.onload = () => filterNews('all');
-  </script>
 </body>
-</html>tml sample placeholder -->
+</html>
